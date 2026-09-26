@@ -1,0 +1,1388 @@
+/* ========================================
+   ラーメンレポート
+   style.css
+======================================== */
+
+
+/* ========================================
+   基本設定
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    background: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background: #ffffff;
+    color: #111111;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        YuGothic,
+        Meiryo,
+        sans-serif;
+
+    line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* ========================================
+   アプリ全体
+======================================== */
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+}
+
+.screen.active {
+    display: block;
+}
+
+
+/* ========================================
+   一覧画面
+======================================== */
+
+#list-screen {
+    position: relative;
+    padding-bottom: 90px;
+}
+
+
+/* ========================================
+   上部オレンジヘッダー
+======================================== */
+
+.list-header {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 84px 40px 38px;
+
+    background: #ff8a1c;
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   検索ボックス
+======================================== */
+
+.search-area {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+
+    height: 92px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border-radius: 22px;
+}
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 100%;
+
+    color: #ffffff;
+
+    font-size: 54px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+#search-input {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 25px 0 0;
+
+    background: transparent;
+
+    border: none;
+    outline: none;
+
+    color: #ffffff;
+
+    font-size: 36px;
+    font-weight: 400;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#search-input:focus {
+    box-shadow: none;
+}
+
+
+/* ========================================
+   フィルターボタン
+======================================== */
+
+.filter-button {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 92px;
+
+    width: 92px;
+    height: 92px;
+
+    padding: 0;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: none;
+    border-radius: 22px;
+
+    color: #ffffff;
+}
+
+.filter-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.filter-icon {
+    position: relative;
+
+    display: block;
+
+    width: 46px;
+    height: 38px;
+
+    font-size: 0;
+}
+
+.filter-icon::before,
+.filter-icon::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+
+    height: 4px;
+
+    background: #ffffff;
+
+    border-radius: 4px;
+}
+
+.filter-icon::before {
+    top: 5px;
+    width: 46px;
+}
+
+.filter-icon::after {
+    top: 19px;
+    width: 30px;
+}
+
+.filter-icon {
+    border-bottom: 4px solid #ffffff;
+    border-radius: 4px;
+}
+
+.filter-button::after {
+    content: "";
+
+    position: absolute;
+
+    top: 17px;
+    right: 18px;
+
+    width: 14px;
+    height: 14px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+}
+
+
+/* ========================================
+   フィルターパネル
+======================================== */
+
+.filter-panel {
+    display: none;
+
+    padding: 20px 40px;
+
+    background: #fff7ef;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.filter-panel.active {
+    display: block;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 12px;
+}
+
+.filter-row:last-child {
+    margin-bottom: 0;
+}
+
+.filter-row label {
+    min-width: 90px;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.filter-row select {
+    flex: 1;
+
+    min-height: 42px;
+
+    padding: 8px 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+
+    font-size: 15px;
+}
+
+
+/* ========================================
+   一覧情報
+======================================== */
+
+.list-info {
+    display: none;
+
+    padding: 12px 40px;
+
+    color: #777777;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   ラーメン一覧
+======================================== */
+
+.ramen-list {
+    width: 100%;
+
+    background: #ffffff;
+}
+
+
+/* ========================================
+   ラーメン1件
+======================================== */
+
+.ramen-card {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 164px;
+
+    padding: 22px 40px;
+
+    background: #ffffff;
+
+    border: none;
+    border-bottom: 2px solid #eeeeee;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease;
+}
+
+.ramen-card:hover {
+    background: #fafafa;
+}
+
+.ramen-card:active {
+    background: #f5f5f5;
+}
+
+
+/* ========================================
+   ラーメン画像
+======================================== */
+
+.ramen-card-image,
+.ramen-card-no-image {
+    flex: 0 0 140px;
+
+    width: 140px;
+    height: 140px;
+
+    border-radius: 22px;
+
+    object-fit: cover;
+}
+
+.ramen-card-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f5f5;
+
+    color: #cccccc;
+
+    font-size: 44px;
+}
+
+
+/* ========================================
+   ラーメン情報
+======================================== */
+
+.ramen-card-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding-left: 38px;
+}
+
+.ramen-card-shop {
+    margin: 0 0 4px;
+
+    color: #111111;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ramen-card-title {
+    margin: 0 0 6px;
+
+    color: #111111;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/*
+   今回の一覧ではジャンルを
+   大きなグレー文字として表示
+*/
+
+.ramen-card-meta {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #777777;
+
+    font-size: 26px;
+
+    line-height: 1.4;
+}
+
+.ramen-card-tag {
+    display: inline-block;
+
+    padding: 0;
+
+    background: transparent;
+
+    color: #777777;
+
+    border-radius: 0;
+
+    font-size: 26px;
+}
+
+
+/*
+   カード内の評価は一覧では非表示
+*/
+
+.ramen-card-rating {
+    display: none;
+}
+
+
+/* ========================================
+   右側矢印
+======================================== */
+
+.ramen-card::after {
+    content: "›";
+
+    flex: 0 0 auto;
+
+    margin-left: 20px;
+
+    color: #777777;
+
+    font-size: 60px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* ========================================
+   空の一覧
+======================================== */
+
+.empty-message {
+    padding: 80px 30px;
+
+    text-align: center;
+
+    color: #777777;
+}
+
+.empty-icon {
+    margin-bottom: 15px;
+
+    font-size: 64px;
+}
+
+.empty-message p {
+    margin: 8px 0;
+
+    font-size: 18px;
+}
+
+
+/* ========================================
+   ページネーション
+======================================== */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 24px;
+
+    width: 100%;
+
+    padding: 34px 20px 30px;
+
+    background: #ffffff;
+}
+
+.page-numbers {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.page-arrow,
+.page-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 72px;
+    height: 72px;
+
+    padding: 0 16px;
+
+    background: #ffffff;
+
+    border: 2px solid #eeeeee;
+    border-radius: 18px;
+
+    color: #111111;
+
+    font-size: 26px;
+
+    transition:
+        background-color 0.15s,
+        border-color 0.15s;
+}
+
+.page-arrow {
+    font-size: 48px;
+    font-weight: 300;
+}
+
+.page-arrow:hover,
+.page-number:hover {
+    background: #fafafa;
+
+    border-color: #dddddd;
+}
+
+.page-number.active {
+    background: #fff1e4;
+
+    border-color: #fff1e4;
+
+    color: #f08a32;
+
+    font-weight: 700;
+}
+
+
+/* ========================================
+   ページネーションの無効状態
+======================================== */
+
+.page-arrow:disabled {
+    color: #bbbbbb;
+
+    background: #ffffff;
+
+    border-color: #eeeeee;
+
+    cursor: default;
+}
+
+
+/* ========================================
+   フローティング投稿ボタン
+======================================== */
+
+.floating-post-button {
+    position: fixed;
+
+    right: 30px;
+    bottom: 30px;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 70px;
+    height: 70px;
+
+    background: #ff8a1c;
+
+    border: none;
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    font-size: 40px;
+    font-weight: 300;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.18);
+}
+
+.floating-post-button:hover {
+    background: #f47d0b;
+}
+
+.floating-post-button:active {
+    transform: scale(0.95);
+}
+
+
+/* ========================================
+   投稿画面
+======================================== */
+
+#post-screen {
+    background: #f7f7f7;
+
+    padding-bottom: 40px;
+}
+
+
+/* ========================================
+   投稿画面ヘッダー
+======================================== */
+
+.sub-header {
+    display: flex;
+    align-items: center;
+
+    height: 80px;
+
+    padding: 0 20px;
+
+    background: #ff8a1c;
+
+    color: #ffffff;
+}
+
+.sub-header h1 {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.back-button {
+    width: 50px;
+    height: 50px;
+
+    margin-right: 8px;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    color: #ffffff;
+
+    font-size: 42px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* ========================================
+   投稿フォーム
+======================================== */
+
+#ramen-form {
+    width: 100%;
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    padding: 20px 16px;
+}
+
+.form-section {
+    margin-bottom: 18px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+}
+
+.form-section h2 {
+    margin: 0 0 18px;
+
+    font-size: 19px;
+}
+
+
+/* ========================================
+   入力フォーム
+======================================== */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #333333;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #ff8a1c;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 138, 28, 0.12);
+}
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 130px;
+}
+
+
+/* ========================================
+   評価
+======================================== */
+
+.rating-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.rating-group:last-child {
+    border-bottom: none;
+}
+
+.rating-group label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.rating-group select {
+    width: 120px;
+
+    padding: 8px;
+
+    border: 1px solid #cccccc;
+    border-radius: 7px;
+
+    font-size: 15px;
+}
+
+.overall-rating {
+    margin-top: 8px;
+
+    padding-top: 18px;
+
+    border-top: 2px solid #eeeeee;
+}
+
+
+/* ========================================
+   写真プレビュー
+======================================== */
+
+.image-preview {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.image-preview:empty {
+    display: none;
+}
+
+.image-preview img {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    border-radius: 10px;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   投稿ボタン
+======================================== */
+
+.form-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.primary-button,
+.secondary-button {
+    min-height: 48px;
+
+    padding: 10px 20px;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.primary-button {
+    background: #ff8a1c;
+
+    border: none;
+
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background: #f47d0b;
+}
+
+.secondary-button {
+    background: #ffffff;
+
+    border: 1px solid #cccccc;
+
+    color: #333333;
+}
+
+
+/* ========================================
+   詳細モーダル
+======================================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.modal-content {
+    position: relative;
+
+    width: calc(100% - 30px);
+    max-width: 700px;
+
+    max-height: calc(100vh - 30px);
+
+    margin: 15px auto;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 15px;
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    background: #eeeeee;
+
+    border: none;
+    border-radius: 50%;
+
+    color: #333333;
+
+    font-size: 28px;
+}
+
+.modal-close:hover {
+    background: #dddddd;
+}
+
+
+/* ========================================
+   詳細画面
+======================================== */
+
+.detail-image {
+    width: 100%;
+
+    max-height: 420px;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    object-fit: cover;
+}
+
+.detail-shop {
+    margin: 0 0 4px;
+
+    color: #777777;
+
+    font-size: 15px;
+}
+
+.detail-title {
+    margin: 0 0 10px;
+
+    font-size: 25px;
+}
+
+.detail-rating {
+    margin-bottom: 20px;
+
+    color: #f2a000;
+
+    font-size: 22px;
+}
+
+.detail-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.detail-info-item {
+    padding: 12px;
+
+    background: #f6f6f6;
+
+    border-radius: 8px;
+}
+
+.detail-info-label {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #777777;
+
+    font-size: 12px;
+}
+
+.detail-info-value {
+    font-weight: 700;
+}
+
+.detail-review {
+    padding-top: 18px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+.detail-review h3 {
+    margin: 0 0 8px;
+
+    font-size: 17px;
+}
+
+.detail-review p {
+    margin: 0;
+
+    white-space: pre-wrap;
+}
+
+
+/* ========================================
+   トースト
+======================================== */
+
+.toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 25px;
+
+    z-index: 2000;
+
+    min-width: 220px;
+    max-width: calc(100% - 40px);
+
+    padding: 12px 18px;
+
+    background: #333333;
+
+    border-radius: 9px;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translate(-50%, 20px);
+
+    transition:
+        opacity 0.25s,
+        transform 0.25s;
+}
+
+.toast.show {
+    opacity: 1;
+
+    transform: translate(-50%, 0);
+}
+
+
+/* ========================================
+   PC・タブレット
+======================================== */
+
+@media (min-width: 768px) {
+
+    #list-screen {
+        max-width: 900px;
+
+        margin: 0 auto;
+
+        box-shadow:
+            0 0 25px rgba(0, 0, 0, 0.04);
+    }
+
+    .list-header {
+        padding-top: 40px;
+    }
+
+}
+
+
+/* ========================================
+   スマートフォン
+======================================== */
+
+@media (max-width: 767px) {
+
+    .list-header {
+        padding:
+            34px
+            16px
+            24px;
+
+        gap: 10px;
+    }
+
+    .search-area {
+        height: 58px;
+
+        border-radius: 16px;
+    }
+
+    .search-icon {
+        width: 50px;
+
+        font-size: 38px;
+    }
+
+    #search-input {
+        padding-right: 12px;
+
+        font-size: 24px;
+    }
+
+    .filter-button {
+        flex-basis: 58px;
+
+        width: 58px;
+        height: 58px;
+
+        border-radius: 16px;
+    }
+
+    .filter-icon {
+        transform: scale(0.75);
+    }
+
+    .filter-button::after {
+        top: 9px;
+        right: 10px;
+
+        width: 11px;
+        height: 11px;
+    }
+
+
+    /* ラーメン一覧 */
+
+    .ramen-card {
+        min-height: 118px;
+
+        padding:
+            14px
+            16px;
+    }
+
+    .ramen-card-image,
+    .ramen-card-no-image {
+        flex-basis: 86px;
+
+        width: 86px;
+        height: 86px;
+
+        border-radius: 15px;
+    }
+
+    .ramen-card-no-image {
+        font-size: 30px;
+    }
+
+    .ramen-card-content {
+        padding-left: 15px;
+    }
+
+    .ramen-card-shop,
+    .ramen-card-title {
+        font-size: 19px;
+
+        line-height: 1.35;
+    }
+
+    .ramen-card-meta,
+    .ramen-card-tag {
+        font-size: 17px;
+    }
+
+    .ramen-card::after {
+        margin-left: 7px;
+
+        font-size: 44px;
+    }
+
+
+    /* ページネーション */
+
+    .pagination {
+        gap: 10px;
+
+        padding:
+            25px
+            12px
+            25px;
+    }
+
+    .page-numbers {
+        gap: 3px;
+    }
+
+    .page-arrow,
+    .page-number {
+        min-width: 48px;
+
+        height: 48px;
+
+        padding: 0 10px;
+
+        border-radius: 13px;
+
+        font-size: 20px;
+    }
+
+    .page-arrow {
+        font-size: 34px;
+    }
+
+
+    /* 投稿ボタン */
+
+    .floating-post-button {
+        right: 18px;
+        bottom: 18px;
+
+        width: 58px;
+        height: 58px;
+
+        font-size: 34px;
+    }
+
+
+    /* フィルター */
+
+    .filter-panel {
+        padding:
+            15px
+            16px;
+    }
+
+    .filter-row {
+        gap: 8px;
+    }
+
+    .filter-row label {
+        min-width: 70px;
+
+        font-size: 13px;
+    }
+
+
+    /* 詳細 */
+
+    .detail-info {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================================
+   小型スマートフォン
+======================================== */
+
+@media (max-width: 380px) {
+
+    .list-header {
+        padding:
+            25px
+            12px
+            18px;
+    }
+
+    .search-area {
+        height: 52px;
+    }
+
+    .search-icon {
+        width: 43px;
+
+        font-size: 32px;
+    }
+
+    #search-input {
+        font-size: 21px;
+    }
+
+    .filter-button {
+        flex-basis: 52px;
+
+        width: 52px;
+        height: 52px;
+    }
+
+.ramen-card {
+    padding: 12px 10px;
+}
+
+    .ramen-card-image,
+    .ramen-card-no-image {
+        flex-basis: 76px;
+
+        width: 76px;
+        height: 76px;
+
+        border-radius: 13px;
+    }
+
+    .ramen-card-content {
+        padding-left: 11px;
+    }
+
+    .ramen-card-shop,
+    .ramen-card-title {
+        font-size: 17px;
+    }
+
+    .ramen-card-meta,
+    .ramen-card-tag {
+        font-size: 15px;
+    }
+
+    .ramen-card::after {
+        font-size: 38px;
+    }
+
+}

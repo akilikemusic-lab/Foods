@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#ff8a20">
+
+    <title>ラーメンレポート</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- =========================
+         一覧画面
+    ========================== -->
+    <section id="list-screen" class="screen active">
+
+        <!-- ヘッダー -->
+        <header class="list-header">
+
+            <!-- 検索 -->
+            <div class="search-area">
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="search"
+                    id="search-input"
+                    placeholder="検索"
+                    autocomplete="off"
+                >
+            </div>
+
+            <!-- フィルター -->
+            <button
+                type="button"
+                id="filter-button"
+                class="filter-button"
+                aria-label="フィルター"
+            >
+                <span class="filter-icon">
+                    ☰
+                </span>
+            </button>
+
+        </header>
+
+
+        <!-- フィルター・ソートメニュー -->
+        <div id="filter-panel" class="filter-panel">
+
+            <div class="filter-row">
+
+                <label for="genre-filter">
+                    ジャンル
+                </label>
+
+                <select id="genre-filter">
+                    <option value="all">すべて</option>
+                    <option value="醤油">醤油</option>
+                    <option value="塩">塩</option>
+                    <option value="味噌">味噌</option>
+                    <option value="豚骨">豚骨</option>
+                    <option value="家系">家系</option>
+                    <option value="二郎系">二郎系</option>
+                    <option value="魚介">魚介</option>
+                    <option value="つけ麺">つけ麺</option>
+                    <option value="まぜそば">まぜそば</option>
+                    <option value="その他">その他</option>
+                </select>
+
+            </div>
+
+
+            <div class="filter-row">
+
+                <label for="sort-order">
+                    並び順
+                </label>
+
+                <select id="sort-order">
+
+                    <option value="newest">
+                        新しい順
+                    </option>
+
+                    <option value="oldest">
+                        古い順
+                    </option>
+
+                    <option value="rating-high">
+                        評価が高い順
+                    </option>
+
+                    <option value="rating-low">
+                        評価が低い順
+                    </option>
+
+                    <option value="price-high">
+                        価格が高い順
+                    </option>
+
+                    <option value="price-low">
+                        価格が安い順
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- 件数 -->
+        <div class="list-info">
+            <span id="ramen-count">0件</span>
+        </div>
+
+
+        <!-- ラーメン一覧 -->
+        <main
+            id="ramen-list"
+            class="ramen-list"
+        >
+        </main>
+
+
+        <!-- データがない場合 -->
+        <div
+            id="empty-message"
+            class="empty-message"
+            style="display: none;"
+        >
+
+            <div class="empty-icon">
+                🍜
+            </div>
+
+            <p>
+                まだラーメンの記録がありません
+            </p>
+
+            <button
+                type="button"
+                id="open-post-button"
+                class="primary-button"
+            >
+                ラーメンを記録する
+            </button>
+
+        </div>
+
+
+        <!-- ページネーション -->
+        <nav
+            id="pagination"
+            class="pagination"
+            aria-label="ページ移動"
+        >
+
+            <button
+                type="button"
+                id="prev-page-button"
+                class="page-arrow"
+                aria-label="前のページ"
+            >
+                ‹
+            </button>
+
+            <div
+                id="page-numbers"
+                class="page-numbers"
+            >
+            </div>
+
+            <button
+                type="button"
+                id="next-page-button"
+                class="page-arrow"
+                aria-label="次のページ"
+            >
+                ›
+            </button>
+
+        </nav>
+
+
+        <!-- 投稿ボタン -->
+        <button
+            type="button"
+            id="floating-post-button"
+            class="floating-post-button"
+            aria-label="ラーメンを追加"
+        >
+            ＋
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         投稿画面
+    ========================== -->
+    <section id="post-screen" class="screen">
+
+        <header class="sub-header">
+
+            <button
+                type="button"
+                id="back-to-list-button"
+                class="back-button"
+            >
+                ‹
+            </button>
+
+            <h1>
+                ラーメンを記録
+            </h1>
+
+        </header>
+
+
+        <form id="ramen-form">
+
+            <!-- 店舗情報 -->
+            <section class="form-section">
+
+                <h2>店舗情報</h2>
+
+                <div class="form-group">
+
+                    <label for="shop-name">
+                        店名
+                    </label>
+
+                    <input
+                        type="text"
+                        id="shop-name"
+                        name="shopName"
+                        placeholder="例：あさが家"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="shop-location">
+                        店舗・場所
+                    </label>
+
+                    <input
+                        type="text"
+                        id="shop-location"
+                        name="shopLocation"
+                        placeholder="例：上野店"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- ラーメン情報 -->
+            <section class="form-section">
+
+                <h2>ラーメン</h2>
+
+                <div class="form-group">
+
+                    <label for="ramen-name">
+                        メニュー名
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ramen-name"
+                        name="ramenName"
+                        placeholder="例：家系ラーメン"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="genre">
+                        ジャンル
+                    </label>
+
+                    <select
+                        id="genre"
+                        name="genre"
+                        required
+                    >
+
+                        <option value="">
+                            選択してください
+                        </option>
+
+                        <option value="醤油">醤油</option>
+                        <option value="塩">塩</option>
+                        <option value="味噌">味噌</option>
+                        <option value="豚骨">豚骨</option>
+                        <option value="家系">家系</option>
+                        <option value="二郎系">二郎系</option>
+                        <option value="魚介">魚介</option>
+                        <option value="つけ麺">つけ麺</option>
+                        <option value="まぜそば">まぜそば</option>
+                        <option value="その他">その他</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="eaten-date">
+                        食べた日
+                    </label>
+
+                    <input
+                        type="date"
+                        id="eaten-date"
+                        name="eatenDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="price">
+                        価格
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        min="0"
+                        step="10"
+                        placeholder="例：1000"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- 評価 -->
+            <section class="form-section">
+
+                <h2>評価</h2>
+
+                <div class="rating-group">
+
+                    <label for="noodle-rating">
+                        麺
+                    </label>
+
+                    <select id="noodle-rating">
+                        <option value="1">★1</option>
+                        <option value="2">★2</option>
+                        <option value="3">★3</option>
+                        <option value="4">★4</option>
+                        <option value="5">★5</option>
+                    </select>
+
+                </div>
+
+
+                <div class="rating-group">
+
+                    <label for="soup-rating">
+                        スープ
+                    </label>
+
+                    <select id="soup-rating">
+                        <option value="1">★1</option>
+                        <option value="2">★2</option>
+                        <option value="3">★3</option>
+                        <option value="4">★4</option>
+                        <option value="5">★5</option>
+                    </select>
+
+                </div>
+
+
+                <div class="rating-group">
+
+                    <label for="topping-rating">
+                        トッピング
+                    </label>
+
+                    <select id="topping-rating">
+                        <option value="1">★1</option>
+                        <option value="2">★2</option>
+                        <option value="3">★3</option>
+                        <option value="4">★4</option>
+                        <option value="5">★5</option>
+                    </select>
+
+                </div>
+
+
+                <div class="rating-group">
+
+                    <label for="volume-rating">
+                        ボリューム
+                    </label>
+
+                    <select id="volume-rating">
+                        <option value="1">★1</option>
+                        <option value="2">★2</option>
+                        <option value="3">★3</option>
+                        <option value="4">★4</option>
+                        <option value="5">★5</option>
+                    </select>
+
+                </div>
+
+
+                <div class="rating-group overall-rating">
+
+                    <label for="overall-rating">
+                        総合評価
+                    </label>
+
+                    <select
+                        id="overall-rating"
+                        required
+                    >
+                        <option value="1">★1</option>
+                        <option value="2">★2</option>
+                        <option value="3">★3</option>
+                        <option value="4">★4</option>
+                        <option value="5">★5</option>
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- 感想 -->
+            <section class="form-section">
+
+                <h2>レビュー</h2>
+
+                <div class="form-group">
+
+                    <textarea
+                        id="review"
+                        name="review"
+                        rows="6"
+                        placeholder="味、麺、具材、量などの感想"
+                    ></textarea>
+
+                </div>
+
+            </section>
+
+
+            <!-- 写真 -->
+            <section class="form-section">
+
+                <h2>写真</h2>
+
+                <div class="form-group">
+
+                    <input
+                        type="file"
+                        id="ramen-image"
+                        name="ramenImage"
+                        accept="image/*"
+                    >
+
+                    <div
+                        id="image-preview"
+                        class="image-preview"
+                    >
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ボタン -->
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    id="cancel-post-button"
+                    class="secondary-button"
+                >
+                    キャンセル
+                </button>
+
+                <button
+                    type="submit"
+                    id="submit-button"
+                    class="primary-button"
+                >
+                    保存する
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- =========================
+         詳細モーダル
+    ========================== -->
+    <div
+        id="detail-modal"
+        class="modal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                id="close-detail-button"
+                class="modal-close"
+                aria-label="閉じる"
+            >
+                ×
+            </button>
+
+            <div id="detail-content">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- 通知 -->
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    >
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
